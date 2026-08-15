@@ -1,0 +1,120 @@
+<html>
+	<head>
+		<title>S.Knigge</title>
+		<style type="text/css">
+		body { margin-left:10%; }
+		p,div,table,ul,ol { margin-left:30px; }
+		</style>
+
+	</head>
+	<body topmargin="30">
+
+
+		<p style="color:grey" >15th of August 2026</p> <br>
+
+		<img src="./Figures/Homelab-docker-compose-images/baner-docker-compose.jpeg" alt="Flex" style="width:100%;">
+
+
+		<h1><b>An analytics server on a Raspberry Pi, in one evening</b></h1>
+
+		<p><i>I had a Raspberry Pi 4 in a drawer and a spare SSD, and I wanted to see how far I could get in one evening. No business
+			case, no deadline, just an idea and an excuse to learn the infrastructure layer I have always left to somebody else.
+			This is what I built, what I learned and an honest note on what it is like to learn this with an AI assistant.</i></p>
+
+		<p><i>It's not like I urgently need an analytics server or created it for a project, but I wanted to understand docker compose better and what is possible.</i></p>
+
+		<h2><b>The setup</b></h2>
+
+		<p>
+			The goal is to build a small always-on machine running RStudio Server in the browser, with data on the SSD rather than the SD
+			card, and the whole configuration in Git so it can be rebuilt if that card dies.
+		</p>
+
+		<p style="text-align:center;">
+			<img src="./Figures/Homelab-docker-compose-images/architecture.svg" width="600">
+			<br> <br>
+				<i style="color:grey;">
+					Figure 1: SSH connection to operate the control pane and an http connection in the local network to access the frontend of the server.
+				</i>
+			<br> <br>
+		</p>
+
+		<p>
+			I used a VS-Code Extension called Remote-SSH which mirrors all files and the environment of the Pi to your local machine. In my case I use a Mac where security tricked me and also my friend Claude quite a bit.
+		</p>
+
+		<p>
+			Docker was set up with one directory per service, each holding its own compose file. The services start and stop independently, so a
+			broken container cannot block a working one.
+		</p>
+
+		<p style="text-align:center;">
+			<img src="./Figures/Homelab-docker-compose-images/docker-compose-screenshot.png" width="600">
+			<br> <br>
+				<i style="color:grey;">
+					Figure 2: These twelve lines are enough for the entire RStudio deployment. Credentials and other identifiers are redacted.
+				</i>
+			<br> <br>
+		</p>
+
+		<p>
+			The framework used was the rocker rstudio latest image (Rocker Project's RStudio Server). It's ARM64-verified for the Raspberry Pi and runs with restart: unless-stopped.
+			<br> <br>
+			Two things I want to bring to the interested readers' attention. The Pi is arm64, and plenty of popular images still ship amd64-only manifests. Docker then falls
+			back to emulation that runs five to twenty times slower, so you get a container that technically works and is practically
+			unusable. And the host directory must exist <b>before</b> the container starts, or Docker creates it owned by root and the
+			service fails on every save while appearing to start perfectly.
+			<br> <br>
+			For the SSD I (together with Claude) mounted it by UUID rather than device name, because <i>sda</i> can
+			become <i>sdb</i> the moment you add a second drive. And we agreed to set <i>nofail</i>, or a disk that is unplugged at boot drops the
+			machine into emergency mode meaning no network, no SSH, and you are walking over with a keyboard. Only one flag can make the difference
+			between a machine you can recover remotely and one you have to physically visit.
+		</p>
+
+		<h2><b>A sentimental detour</b></h2>
+
+		<p>
+			Then I opened the browser on http port 8787 and there it was: The four panes, exactly how I remember it. I studied at Duke in 2019
+			and R was the language I did everything in. These days I write Python and almost nothing else. Python won the race. But the
+			muscle memory was still intact. I did not expect a Raspberry Pi project to be nostalgic but it most definitely was and it felt like back on the 2nd floor of Perkins Library in The Grad Reading Room 211.
+		</p>
+
+		<p>
+			A container that starts is not a container that works, so I ran a simulation just like back in university. Gamblers faced a slightly unfavourable
+			40% win rate, playing two million rounds under three staking strategies. I compared the strategies and identified one that is promising for me to try on my next trip to Las Vegas.
+		</p>
+
+		<p style="text-align:center;">
+			<img src="./Figures/Homelab-docker-compose-images/rstudio-interface.png" width="600">
+			<br> <br>
+				<i style="color:grey;">
+					Figure 3: The well known interface of RStudio like back on the 2nd floor of Perkins Library.
+				</i>
+			<br> <br>
+		</p>
+
+		<h2><b>Building this with AI</b></h2>
+
+		<p>
+			I could not have done this in an evening alone, not even with YouTube and Stack Overflow. Not because any single step is hard, but because the number of small unknowns
+			is enormous and each one is effort and search. I would have lost my motivation on this. The AI gave some extremely helpful hints specifically for frameworks to use that I would not have been thinking of myself.
+			<br> <br>
+			But twice I ended up in a loop where it kept proposing variations of the same fix. Each
+			suggestion was reasonable in isolation but none of them worked. That is when you get out and do it yourself. Sometimes the AI is lacking direction and gets stuck.
+			<br> <br>
+			The AI agent might help with syntax and documentation, but the direction is clearly not given by AI yet, be it intentional by the providers or unintentional due to shortcomings of the LLM itself.
+		</p>
+
+		<h2><b>What is next</b></h2>
+
+		<p>
+			I plan on hosting some other useful helpers and then terminate the entire setup since security freaks me out a little on this end. I will need more threat modeling and tests to check if this is secure enough to be used going forward. For now it was a very interesting and amusing experiment.
+		</p>
+		<br><br>
+		<p><i>
+			Note: If the AI is presented extremely favorable this can only be the case not because this would be written by AI but because I did let my Claude Code review this article and change typos only ;)
+		</i></p>
+
+	</body>
+
+</html>
