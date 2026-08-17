@@ -658,6 +658,59 @@ figure .pdf-embed {
 	color: var(--ink-faint);
 }
 
+/* ---------- category chips ----------
+
+   Icons are inline SVG rather than an external sprite or icon font:
+   a sprite referenced with <use href="icons.svg#..."> does not load
+   over file://, which would break local previews, and an icon font
+   would be a second request for three glyphs. Inline SVG also
+   inherits the chip colour through currentColor. */
+
+.cat {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-family: var(--sans);
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	text-transform: none;
+	white-space: nowrap;
+}
+
+.cat-icon {
+	width: 14px;
+	height: 14px;
+	flex: none;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.4;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.cat-icon .solid {
+	fill: currentColor;
+	stroke: none;
+}
+
+/* One colour per category, so the list can be scanned by hue */
+.cat-infrastructure { color: #0f6e56; }
+.cat-data-science   { color: #2a5b96; }
+.cat-management     { color: #854f0b; }
+
+/* In the article masthead the chip sits next to the date */
+.eyebrow {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem 0.75rem;
+}
+
+.eyebrow .cat {
+	letter-spacing: 0.06em;
+}
+
 /* ---------- small status note (replaces <marquee>) ---------- */
 
 .status-note {
