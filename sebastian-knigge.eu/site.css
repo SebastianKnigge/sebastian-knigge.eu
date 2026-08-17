@@ -612,8 +612,200 @@ figure .pdf-embed {
 	color: var(--ink-soft);
 }
 
+/* ---------- article index (articles.html) ---------- */
+
+.index-table {
+	font-size: 0.88rem;
+}
+
+.index-table th {
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--rule);
+	font-family: var(--sans);
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+}
+
+.index-table tbody tr + tr {
+	border-top: 1px solid var(--rule);
+}
+
+.index-table .date {
+	width: 6.5rem;
+	font-family: var(--sans);
+	font-size: 0.76rem;
+	color: var(--ink-soft);
+	white-space: nowrap;
+}
+
+.index-table .title a {
+	color: var(--accent-deep);
+	text-decoration: none;
+}
+
+.index-table .title a:hover {
+	color: var(--accent);
+	text-decoration: underline;
+}
+
+.index-table .category {
+	width: 7.5rem;
+	font-family: var(--sans);
+	font-size: 0.72rem;
+	color: var(--ink-faint);
+}
+
+/* ---------- small status note (replaces <marquee>) ---------- */
+
+.status-note {
+	display: inline-block;
+	margin-top: 1.5rem;
+	padding: 0.35rem 0.75rem;
+	background: var(--paper-warm);
+	border: 1px solid var(--rule);
+	border-radius: 999px;
+	font-family: var(--sans);
+	font-size: 0.76rem;
+	color: var(--ink-soft);
+}
+
+/* ---------- link lists (other / links pages) ---------- */
+
+.link-list {
+	list-style: none;
+	margin: 1.25rem 0;
+	padding: 0;
+}
+
+.link-list li {
+	margin-bottom: 0.6rem;
+	padding-left: 1rem;
+	border-left: 2px solid var(--rule);
+}
+
+.link-list a {
+	font-family: var(--sans);
+	font-size: 0.92rem;
+	text-decoration: none;
+}
+
+.link-list a:hover {
+	text-decoration: underline;
+}
+
+/* ---------- fine print ---------- */
+
+.fine-print {
+	margin: 1.5rem 0;
+	padding: 0.9rem 1.1rem;
+	background: var(--paper-warm);
+	border: 1px solid var(--rule);
+	border-radius: 4px;
+	font-size: 0.8rem;
+	line-height: 1.55;
+	color: var(--ink-soft);
+}
+
 /* ------------------------------------------------------------
-   6. responsive + print
+   6. frame chrome (navigation, headline, footer bar)
+
+   These pages are not content columns: they fill small frames of
+   index.html, so they opt out of the page padding and measure.
+   ------------------------------------------------------------ */
+
+body.frame {
+	padding: 0;
+	background: transparent;
+}
+
+/* headline.html — the site title strip */
+.frame-headline {
+	padding: 1.5rem 1rem 0;
+	text-align: center;
+}
+
+.frame-headline a {
+	font-family: var(--serif);
+	font-size: 2.4rem;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	color: var(--accent-deep);
+	text-decoration: none;
+}
+
+.frame-headline a:hover {
+	color: var(--accent);
+}
+
+/* navigation.html — the left hand menu */
+.frame-nav {
+	padding: 5rem 0 0 1.75rem;
+	font-family: var(--sans);
+}
+
+.frame-nav .nav-label {
+	margin: 0 0 1rem;
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 0.11em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+}
+
+.frame-nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.frame-nav li {
+	margin-bottom: 0.9rem;
+}
+
+.frame-nav a {
+	display: inline-block;
+	font-size: 0.88rem;
+	font-weight: 500;
+	color: var(--ink);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+
+.frame-nav a:hover,
+.frame-nav a:focus-visible {
+	color: var(--accent);
+	border-bottom-color: var(--accent);
+}
+
+/* impressumsleiste.html — the footer bar */
+.frame-footer {
+	padding: 0.6rem 1rem;
+	text-align: center;
+	font-family: var(--sans);
+	font-size: 0.72rem;
+	letter-spacing: 0.04em;
+	color: var(--ink-faint);
+}
+
+.frame-footer a {
+	color: var(--ink-faint);
+	text-decoration: none;
+}
+
+.frame-footer a:hover {
+	color: var(--accent);
+}
+
+.frame-footer .sep {
+	margin: 0 0.4rem;
+	color: var(--rule);
+}
+
+/* ------------------------------------------------------------
+   7. responsive + print
    ------------------------------------------------------------ */
 
 @media (max-width: 520px) {
