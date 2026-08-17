@@ -308,6 +308,16 @@ figcaption .figure-label {
 	color: var(--ink);
 }
 
+/* A figure that links to a larger version */
+figure a img {
+	transition: border-color 0.15s;
+}
+
+figure a:hover img,
+figure a:focus-visible img {
+	border-color: var(--accent);
+}
+
 /* A figure that reads better below full width */
 figure.narrow img {
 	width: 80%;
