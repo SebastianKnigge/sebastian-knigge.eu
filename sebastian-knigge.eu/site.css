@@ -1,8 +1,8 @@
 /* ============================================================
    site.css — the single stylesheet for sebastian-knigge.eu
 
-   Linked as ../site.css        from subpages/*.html
-             ../../site.css     from subpages/articles/*.html
+   Linked as ../site.css      from pages in subpages
+             ../../site.css   from pages in subpages/articles
 
    Every page renders inside the "mitte" frame of index.html,
    which is 600px wide and 700px tall with scrolling="AUTO".
@@ -721,19 +721,32 @@ body.frame {
 	background: transparent;
 }
 
-/* headline.html — the site title strip */
+/* headline.html — the site title strip.
+
+   index.html asks for rows="100,700,80" inside a row that is often
+   shorter than their 880px total, so the browser scales this frame
+   down, and it carries scrolling="NO". The title must therefore fit
+   whatever height it is given: it fills the frame, centres itself,
+   and scales with the frame height rather than assuming 100px. */
 .frame-headline {
-	padding: 1.5rem 1rem 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	padding: 0 1rem;
+	overflow: hidden;
 	text-align: center;
 }
 
 .frame-headline a {
 	font-family: var(--serif);
-	font-size: 2.4rem;
+	font-size: min(2.4rem, 46vh);
+	line-height: 1.1;
 	font-weight: 600;
 	letter-spacing: -0.02em;
 	color: var(--accent-deep);
 	text-decoration: none;
+	white-space: nowrap;
 }
 
 .frame-headline a:hover {
@@ -780,9 +793,16 @@ body.frame {
 	border-bottom-color: var(--accent);
 }
 
-/* impressumsleiste.html — the footer bar */
+/* impressumsleiste.html — the footer bar. Same constraint as the
+   headline: a short, non-scrolling frame, so centre inside whatever
+   height it gets instead of relying on padding. */
 .frame-footer {
-	padding: 0.6rem 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	padding: 0 1rem;
+	overflow: hidden;
 	text-align: center;
 	font-family: var(--sans);
 	font-size: 0.72rem;
