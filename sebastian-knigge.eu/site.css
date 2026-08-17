@@ -1,0 +1,987 @@
+/* ============================================================
+   site.css — the single stylesheet for sebastian-knigge.eu
+
+   Linked as ../site.css      from pages in subpages
+             ../../site.css   from pages in subpages/articles
+
+   Every page renders inside the "mitte" frame of index.html,
+   which is 600px wide and 700px tall with scrolling="AUTO".
+   Nothing here may force horizontal scrolling, and no external
+   fonts or assets are requested.
+
+   Layout wrappers:
+     .article  long-form article pages
+     .page     CV and other content pages
+
+   Contents:
+     1. tokens
+     2. base
+     3. shared elements (links, lists, code)
+     4. article components
+     5. page components
+     6. responsive + print
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. tokens
+   ------------------------------------------------------------ */
+
+:root {
+	/* Ink — the neutrals also used in architecture.svg */
+	--ink:        #2c2c2a;
+	--ink-soft:   #5f5e5a;
+	--ink-faint:  #8a8884;
+
+	/* Accent — #123229 is the nav hover colour, #0f6e56 the
+	   green already used in the diagrams */
+	--accent:      #0f6e56;
+	--accent-deep: #123229;
+
+	/* Surfaces */
+	--paper:      #ffffff;
+	--paper-warm: #faf9f6;
+	--rule:       #e4e2dc;
+	--stripe:     #f4f3ef;
+
+	--measure: 34rem;
+
+	--serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+	--sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+	--mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Sailing CVs keep their own nautical identity: same layout and type,
+   blue accents instead of green, matching the blue row striping the
+   pages used before */
+body.theme-sailing {
+	--accent:      #2a5b96;
+	--accent-deep: #1b3a61;
+	--stripe:      #eef2f9;
+}
+
+/* ------------------------------------------------------------
+   2. base
+   ------------------------------------------------------------ */
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 2.25rem 1.75rem 3rem;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--serif);
+	font-size: 16px;
+	line-height: 1.6;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Nothing may push the frame sideways */
+img, svg, table, pre {
+	max-width: 100%;
+}
+
+.article,
+.page {
+	max-width: var(--measure);
+	margin: 0 auto;
+}
+
+/* Long-form pages read at a slightly larger size than the CVs */
+.article {
+	font-size: 17px;
+	line-height: 1.65;
+}
+
+.article {
+	padding-bottom: 0.5rem;
+}
+
+/* ------------------------------------------------------------
+   3. shared elements
+   ------------------------------------------------------------ */
+
+p {
+	margin: 0 0 1rem;
+}
+
+.article p {
+	margin-bottom: 1.15rem;
+	hyphens: auto;
+}
+
+a {
+	color: var(--accent);
+	text-underline-offset: 2px;
+	text-decoration-thickness: 1px;
+}
+
+a:hover {
+	color: var(--accent-deep);
+}
+
+strong, b {
+	font-weight: 650;
+}
+
+h3 {
+	margin: 1.9rem 0 0.6rem;
+	font-family: var(--sans);
+	font-size: 0.95rem;
+	font-weight: 650;
+	color: var(--ink);
+}
+
+ul, ol {
+	margin: 0 0 1rem;
+	padding-left: 1.25rem;
+}
+
+li {
+	margin-bottom: 0.4rem;
+}
+
+li::marker {
+	color: var(--accent);
+}
+
+.article ul,
+.article ol {
+	margin-bottom: 1.15rem;
+	padding-left: 1.35rem;
+}
+
+.article li {
+	margin-bottom: 0.5rem;
+	padding-left: 0.2rem;
+}
+
+/* Long URLs must never widen the frame */
+a, figcaption, .footnote {
+	overflow-wrap: anywhere;
+}
+
+/* Inline technical terms — sda, nofail, restart: unless-stopped */
+code {
+	padding: 0.1em 0.36em;
+	background: var(--paper-warm);
+	border: 1px solid var(--rule);
+	border-radius: 3px;
+	font-family: var(--mono);
+	font-size: 0.86em;
+	color: var(--accent-deep);
+	white-space: nowrap;
+}
+
+/* A path or command on its own line */
+.command {
+	margin: 0 0 1.15rem;
+	padding: 0.85rem 1rem;
+	background: var(--paper-warm);
+	border: 1px solid var(--rule);
+	border-left: 3px solid var(--accent);
+	border-radius: 3px;
+	font-family: var(--mono);
+	font-size: 0.82rem;
+	line-height: 1.5;
+	color: var(--ink);
+	overflow-x: auto;
+	white-space: normal;
+}
+
+.command code {
+	padding: 0;
+	background: none;
+	border: 0;
+	font-size: 1em;
+	white-space: normal;
+}
+
+/* ------------------------------------------------------------
+   4. article components
+   ------------------------------------------------------------ */
+
+.article-header {
+	margin-bottom: 2rem;
+}
+
+.eyebrow {
+	margin: 0 0 1.25rem;
+	font-family: var(--sans);
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.11em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+}
+
+.banner {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 0 1.75rem;
+	border-radius: 4px;
+}
+
+.article h1 {
+	margin: 0 0 1.1rem;
+	font-size: 2rem;
+	font-weight: 600;
+	line-height: 1.18;
+	letter-spacing: -0.015em;
+	color: var(--accent-deep);
+	text-wrap: balance;
+}
+
+.article h2 {
+	margin: 2.75rem 0 1rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--rule);
+	font-family: var(--sans);
+	font-size: 1.12rem;
+	font-weight: 650;
+	letter-spacing: -0.005em;
+	color: var(--accent-deep);
+}
+
+/* Standfirst: the italic intro that opens the piece */
+.lead {
+	margin: 0 0 1rem;
+	padding-left: 1rem;
+	border-left: 2px solid var(--accent);
+	font-size: 1.06rem;
+	line-height: 1.6;
+	color: var(--ink-soft);
+	font-style: italic;
+}
+
+.lead + .lead {
+	margin-top: -0.25rem;
+}
+
+/* Numbered contents list at the top of an article */
+.toc {
+	margin: 0 0 1.75rem;
+	padding: 0.9rem 1.1rem 0.9rem 2.2rem;
+	background: var(--paper-warm);
+	border: 1px solid var(--rule);
+	border-radius: 4px;
+	font-family: var(--sans);
+	font-size: 0.88rem;
+	line-height: 1.5;
+}
+
+.toc li {
+	margin-bottom: 0.3rem;
+}
+
+/* ---------- figures ---------- */
+
+figure {
+	margin: 2rem 0;
+}
+
+figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border: 1px solid var(--rule);
+	border-radius: 4px;
+	background: var(--paper-warm);
+}
+
+figcaption {
+	margin-top: 0.7rem;
+	padding-left: 0.75rem;
+	border-left: 2px solid var(--rule);
+	font-family: var(--sans);
+	font-size: 0.8rem;
+	line-height: 1.5;
+	color: var(--ink-soft);
+}
+
+figcaption .figure-label {
+	font-weight: 650;
+	color: var(--ink);
+}
+
+/* A figure that links to a larger version */
+figure a img {
+	transition: border-color 0.15s;
+}
+
+figure a:hover img,
+figure a:focus-visible img {
+	border-color: var(--accent);
+}
+
+/* A figure that reads better below full width */
+figure.narrow img {
+	width: 80%;
+	margin: 0 auto;
+	border: 0;
+	background: none;
+}
+
+figure.plain img {
+	border: 0;
+	background: none;
+}
+
+/* Low-resolution screenshots: render well below natural size, so the
+   browser downsamples instead of stretching. Stays crisp on Retina,
+   where every CSS pixel is drawn with two device pixels. */
+figure.thumb img {
+	display: block;
+	width: 140px;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto;
+	border: 1px solid var(--rule);
+	border-radius: 3px;
+	background: var(--paper-warm);
+}
+
+/* Small assets (equations, badges) must never be upscaled past their
+   natural size, or they go blurry */
+figure.small img {
+	display: block;
+	width: auto;
+	max-width: 100%;
+	margin: 0 auto;
+	border: 0;
+	background: none;
+}
+
+/* ---------- embeds ---------- */
+
+.pdf-embed {
+	display: block;
+	width: 100%;
+	height: 460px;
+	margin: 1.5rem 0;
+	border: 1px solid var(--rule);
+	border-radius: 4px;
+	background: var(--paper-warm);
+}
+
+/* A4 portrait pages need more room than a landscape sheet */
+.pdf-embed.portrait {
+	height: 560px;
+}
+
+figure .pdf-embed {
+	margin: 0;
+}
+
+/* Some browsers refuse to render PDFs in a frame — always offer the link */
+.pdf-fallback {
+	margin: 0.5rem 0 0;
+	font-family: var(--sans);
+	font-size: 0.8rem;
+	color: var(--ink-soft);
+}
+
+/* ---------- data tables inside articles ---------- */
+
+.data-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: var(--sans);
+	font-size: 0.78rem;
+	line-height: 1.3;
+}
+
+.data-table th {
+	padding: 0.5rem 0.4rem;
+	background: var(--paper-warm);
+	border-bottom: 1px solid var(--rule);
+	font-weight: 650;
+	text-align: center;
+	vertical-align: bottom;
+	color: var(--ink);
+}
+
+.data-table td {
+	padding: 0.45rem 0.4rem;
+	text-align: center;
+	border-bottom: 1px solid var(--rule);
+}
+
+.data-table tbody tr:nth-child(odd) {
+	background: var(--stripe);
+}
+
+.data-table th:first-child,
+.data-table td:first-child {
+	text-align: left;
+	font-weight: 650;
+}
+
+/* ---------- notes ---------- */
+
+.footnote {
+	margin-top: 2.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	font-size: 0.82rem;
+	line-height: 1.5;
+	color: var(--ink-soft);
+	font-style: italic;
+}
+
+.postscript {
+	margin-top: 3rem;
+	padding: 1.1rem 1.25rem;
+	background: var(--paper-warm);
+	border: 1px solid var(--rule);
+	border-radius: 4px;
+	font-size: 0.92rem;
+	line-height: 1.55;
+	color: var(--ink-soft);
+	font-style: italic;
+}
+
+/* ---------- article-to-article navigation ---------- */
+
+.article-nav {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	gap: 0.75rem 1rem;
+	align-items: start;
+	margin-top: 3rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--rule);
+	font-family: var(--sans);
+}
+
+/* Explicit columns, so a missing Previous or Next on the first and last
+   article does not shift the remaining links out of position */
+.nav-prev  { grid-column: 1; }
+.nav-index { grid-column: 2; }
+.nav-next  { grid-column: 3; text-align: right; }
+
+.article-nav a {
+	display: block;
+	color: var(--ink);
+	text-decoration: none;
+}
+
+.nav-dir {
+	display: block;
+	margin-bottom: 0.25rem;
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+}
+
+.nav-title {
+	font-family: var(--serif);
+	font-size: 0.92rem;
+	line-height: 1.35;
+	color: var(--accent-deep);
+}
+
+.article-nav a:hover .nav-title,
+.article-nav a:focus-visible .nav-title {
+	color: var(--accent);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.nav-index {
+	align-self: center;
+	padding: 0.3rem 0.7rem;
+	border: 1px solid var(--rule);
+	border-radius: 999px;
+	font-size: 0.76rem;
+	color: var(--ink-soft);
+	white-space: nowrap;
+}
+
+.article-nav a.nav-index:hover,
+.article-nav a.nav-index:focus-visible {
+	color: var(--accent);
+	border-color: var(--accent);
+}
+
+/* ------------------------------------------------------------
+   5. page components (CV and other content pages)
+   ------------------------------------------------------------ */
+
+.page h1 {
+	margin: 0 0 1.25rem;
+	font-size: 1.75rem;
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: -0.015em;
+	color: var(--accent-deep);
+}
+
+/* Replaces the old "<b>Label</b><hr>" section markers */
+.page h2 {
+	margin: 2.25rem 0 0.9rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	font-family: var(--sans);
+	font-size: 1rem;
+	font-weight: 650;
+	letter-spacing: -0.005em;
+	color: var(--accent-deep);
+}
+
+.portrait {
+	display: block;
+	width: 150px;
+	height: auto;
+	margin: 0 0 1.5rem;
+	border-radius: 4px;
+}
+
+.page table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.92rem;
+}
+
+.page td,
+.page th {
+	padding: 0.55rem 0.6rem;
+	vertical-align: top;
+	text-align: left;
+}
+
+/* Key/value block, e.g. personal details */
+.facts td:first-child {
+	width: 42%;
+	color: var(--ink-soft);
+	font-family: var(--sans);
+	font-size: 0.84rem;
+	white-space: nowrap;
+}
+
+/* Dated entries: employment, education, sailing experience */
+.timeline tr + tr {
+	border-top: 1px solid var(--rule);
+}
+
+.timeline tbody tr:nth-child(odd) {
+	background: var(--stripe);
+}
+
+.timeline .when {
+	width: 26%;
+	font-family: var(--sans);
+	font-size: 0.78rem;
+	line-height: 1.35;
+	color: var(--ink-soft);
+	white-space: nowrap;
+}
+
+.timeline .when .duration {
+	display: block;
+	color: var(--ink-faint);
+	font-size: 0.72rem;
+}
+
+.timeline .what ul {
+	margin: 0;
+	padding-left: 1.1rem;
+}
+
+.timeline .what li + li {
+	margin-top: 0.35rem;
+}
+
+.timeline .logo {
+	width: 74px;
+	text-align: center;
+}
+
+.timeline .logo img {
+	max-height: 42px;
+	width: auto;
+}
+
+.timeline .logo img.tall {
+	max-height: 58px;
+}
+
+/* ---------- certifications ---------- */
+
+.certs {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	gap: 1.25rem 0.75rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.certs li {
+	margin: 0;
+	text-align: center;
+	font-family: var(--sans);
+	font-size: 0.76rem;
+	line-height: 1.3;
+	color: var(--ink);
+}
+
+.certs img {
+	display: block;
+	height: 62px;
+	width: auto;
+	margin: 0 auto 0.5rem;
+}
+
+.certs .code {
+	display: block;
+	margin-top: 0.2rem;
+	color: var(--ink-faint);
+	font-size: 0.72rem;
+	letter-spacing: 0.04em;
+}
+
+/* ---------- footer note (language switch etc.) ---------- */
+
+.page-note {
+	margin-top: 2.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	font-family: var(--sans);
+	font-size: 0.82rem;
+	color: var(--ink-soft);
+}
+
+/* ---------- article index (articles.html) ---------- */
+
+.index-table {
+	font-size: 0.88rem;
+}
+
+.index-table th {
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--rule);
+	font-family: var(--sans);
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+}
+
+.index-table tbody tr + tr {
+	border-top: 1px solid var(--rule);
+}
+
+.index-table .date {
+	width: 6.5rem;
+	font-family: var(--sans);
+	font-size: 0.76rem;
+	color: var(--ink-soft);
+	white-space: nowrap;
+}
+
+.index-table .title a {
+	color: var(--accent-deep);
+	text-decoration: none;
+}
+
+.index-table .title a:hover {
+	color: var(--accent);
+	text-decoration: underline;
+}
+
+.index-table .category {
+	width: 7.5rem;
+	font-family: var(--sans);
+	font-size: 0.72rem;
+	color: var(--ink-faint);
+}
+
+/* ---------- category chips ----------
+
+   Icons are inline SVG rather than an external sprite or icon font:
+   a sprite referenced with <use href="icons.svg#..."> does not load
+   over file://, which would break local previews, and an icon font
+   would be a second request for three glyphs. Inline SVG also
+   inherits the chip colour through currentColor. */
+
+.cat {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-family: var(--sans);
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	text-transform: none;
+	white-space: nowrap;
+}
+
+.cat-icon {
+	width: 14px;
+	height: 14px;
+	flex: none;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.4;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.cat-icon .solid {
+	fill: currentColor;
+	stroke: none;
+}
+
+/* One colour per category, so the list can be scanned by hue */
+.cat-infrastructure { color: #0f6e56; }
+.cat-data-science   { color: #2a5b96; }
+.cat-management     { color: #854f0b; }
+
+/* In the article masthead the chip sits next to the date */
+.eyebrow {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem 0.75rem;
+}
+
+.eyebrow .cat {
+	letter-spacing: 0.06em;
+}
+
+/* ---------- small status note (replaces <marquee>) ---------- */
+
+.status-note {
+	display: inline-block;
+	margin-top: 1.5rem;
+	padding: 0.35rem 0.75rem;
+	background: var(--paper-warm);
+	border: 1px solid var(--rule);
+	border-radius: 999px;
+	font-family: var(--sans);
+	font-size: 0.76rem;
+	color: var(--ink-soft);
+}
+
+/* ---------- link lists (other / links pages) ---------- */
+
+.link-list {
+	list-style: none;
+	margin: 1.25rem 0;
+	padding: 0;
+}
+
+.link-list li {
+	margin-bottom: 0.6rem;
+	padding-left: 1rem;
+	border-left: 2px solid var(--rule);
+}
+
+.link-list a {
+	font-family: var(--sans);
+	font-size: 0.92rem;
+	text-decoration: none;
+}
+
+.link-list a:hover {
+	text-decoration: underline;
+}
+
+/* ---------- fine print ---------- */
+
+.fine-print {
+	margin: 1.5rem 0;
+	padding: 0.9rem 1.1rem;
+	background: var(--paper-warm);
+	border: 1px solid var(--rule);
+	border-radius: 4px;
+	font-size: 0.8rem;
+	line-height: 1.55;
+	color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------
+   6. frame chrome (navigation, headline, footer bar)
+
+   These pages are not content columns: they fill small frames of
+   index.html, so they opt out of the page padding and measure.
+   ------------------------------------------------------------ */
+
+body.frame {
+	padding: 0;
+	background: transparent;
+}
+
+/* headline.html — the site title strip.
+
+   index.html asks for rows="100,700,80" inside a row that is often
+   shorter than their 880px total, so the browser scales this frame
+   down, and it carries scrolling="NO". The title must therefore fit
+   whatever height it is given: it fills the frame, centres itself,
+   and scales with the frame height rather than assuming 100px. */
+.frame-headline {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	padding: 0 1rem;
+	overflow: hidden;
+	text-align: center;
+}
+
+.frame-headline a {
+	font-family: var(--serif);
+	font-size: min(2.4rem, 46vh);
+	line-height: 1.1;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	color: var(--accent-deep);
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.frame-headline a:hover {
+	color: var(--accent);
+}
+
+/* navigation.html — the left hand menu */
+.frame-nav {
+	padding: 5rem 0 0 1.75rem;
+	font-family: var(--sans);
+}
+
+.frame-nav .nav-label {
+	margin: 0 0 1rem;
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 0.11em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+}
+
+.frame-nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.frame-nav li {
+	margin-bottom: 0.9rem;
+}
+
+.frame-nav a {
+	display: inline-block;
+	font-size: 0.88rem;
+	font-weight: 500;
+	color: var(--ink);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+
+.frame-nav a:hover,
+.frame-nav a:focus-visible {
+	color: var(--accent);
+	border-bottom-color: var(--accent);
+}
+
+/* impressumsleiste.html — the footer bar. Same constraint as the
+   headline: a short, non-scrolling frame, so centre inside whatever
+   height it gets instead of relying on padding. */
+.frame-footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	padding: 0 1rem;
+	overflow: hidden;
+	text-align: center;
+	font-family: var(--sans);
+	font-size: 0.72rem;
+	letter-spacing: 0.04em;
+	color: var(--ink-faint);
+}
+
+.frame-footer a {
+	color: var(--ink-faint);
+	text-decoration: none;
+}
+
+.frame-footer a:hover {
+	color: var(--accent);
+}
+
+.frame-footer .sep {
+	margin: 0 0.4rem;
+	color: var(--rule);
+}
+
+/* ------------------------------------------------------------
+   7. responsive + print
+   ------------------------------------------------------------ */
+
+@media (max-width: 520px) {
+	body {
+		padding: 1.75rem 1.25rem 2.5rem;
+	}
+
+	.article {
+		font-size: 16px;
+	}
+
+	.article h1 {
+		font-size: 1.6rem;
+	}
+
+	.page h1 {
+		font-size: 1.5rem;
+	}
+
+	.timeline .when,
+	.timeline .logo {
+		width: auto;
+	}
+
+	.article-nav {
+		grid-template-columns: 1fr;
+	}
+
+	.nav-prev, .nav-index, .nav-next {
+		grid-column: 1;
+		text-align: left;
+	}
+
+	.nav-index {
+		justify-self: start;
+	}
+}
+
+@media print {
+	body {
+		padding: 0;
+		font-size: 11pt;
+	}
+
+	.article {
+		font-size: 11pt;
+	}
+
+	.lead, figcaption, .postscript {
+		border-color: #ccc;
+	}
+
+	.timeline tbody tr:nth-child(odd) {
+		background: none;
+	}
+
+	.article-nav {
+		display: none;
+	}
+}

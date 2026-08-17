@@ -3,14 +3,20 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>S.Knigge</title>
-		<link rel="stylesheet" type="text/css" href="../../article.css">
+		<link rel="stylesheet" type="text/css" href="../../site.css">
 	</head>
 
 	<body>
 		<article class="article">
 
 			<header class="article-header">
-				<p class="eyebrow">1st of November 2021 · Data Science</p>
+				<p class="eyebrow">
+					<span>1st of November 2021</span>
+					<span class="cat cat-data-science">
+						<svg class="cat-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 2v11.5H14"/><path d="M4.8 11.2l2.7-3.3 2.3 1.8 3.1-4.3"/></svg>
+						Data Science
+					</span>
+				</p>
 
 				<img class="banner"
 					src="./Figures/headers/Ingredient_Procurement_header.jpg"
@@ -113,13 +119,40 @@
 			</p>
 
 			<figure>
-				<iframe class="pdf-embed portrait"
-					src="Figures/Ingredient_Procrement_Table1.pdf"
-					title="MPTL table documenting the modeling approach decision">
-				</iframe>
-				<p class="pdf-fallback">
-					<a href="Figures/Ingredient_Procrement_Table1.pdf" target="_blank">Open Table 1 as PDF</a>
-				</p>
+				<table class="data-table">
+					<thead>
+						<tr>
+							<th scope="col">Model</th>
+							<th scope="col"><u>M</u>anagement in production</th>
+							<th scope="col"><u>P</u>redictive power</th>
+							<th scope="col"><u>T</u>uning simplicity</th>
+							<th scope="col"><u>L</u>atency in production</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">ARIMA</th>
+							<td>6</td>
+							<td>10</td>
+							<td>8</td>
+							<td>8</td>
+						</tr>
+						<tr>
+							<th scope="row">FB-Prophet</th>
+							<td>10</td>
+							<td>10</td>
+							<td>10</td>
+							<td>9</td>
+						</tr>
+						<tr>
+							<th scope="row">SES</th>
+							<td>8</td>
+							<td>7</td>
+							<td>7</td>
+							<td>10</td>
+						</tr>
+					</tbody>
+				</table>
 				<figcaption>
 					<span class="figure-label">Table 1:</span> MPTL-Table to document the
 					modeling approach decision; The categories chosen can vary from use case
