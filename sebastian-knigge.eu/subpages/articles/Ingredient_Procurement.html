@@ -119,13 +119,40 @@
 			</p>
 
 			<figure>
-				<iframe class="pdf-embed portrait"
-					src="Figures/Ingredient_Procrement_Table1.pdf"
-					title="MPTL table documenting the modeling approach decision">
-				</iframe>
-				<p class="pdf-fallback">
-					<a href="Figures/Ingredient_Procrement_Table1.pdf" target="_blank">Open Table 1 as PDF</a>
-				</p>
+				<table class="data-table">
+					<thead>
+						<tr>
+							<th scope="col">Model</th>
+							<th scope="col"><u>M</u>anagement in production</th>
+							<th scope="col"><u>P</u>redictive power</th>
+							<th scope="col"><u>T</u>uning simplicity</th>
+							<th scope="col"><u>L</u>atency in production</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">ARIMA</th>
+							<td>6</td>
+							<td>10</td>
+							<td>8</td>
+							<td>8</td>
+						</tr>
+						<tr>
+							<th scope="row">FB-Prophet</th>
+							<td>10</td>
+							<td>10</td>
+							<td>10</td>
+							<td>9</td>
+						</tr>
+						<tr>
+							<th scope="row">SES</th>
+							<td>8</td>
+							<td>7</td>
+							<td>7</td>
+							<td>10</td>
+						</tr>
+					</tbody>
+				</table>
 				<figcaption>
 					<span class="figure-label">Table 1:</span> MPTL-Table to document the
 					modeling approach decision; The categories chosen can vary from use case
