@@ -32,6 +32,15 @@
 	--sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
+/* Sailing CVs keep their own nautical identity: same layout and type,
+   blue accents instead of green, matching the blue row striping the
+   pages used before */
+body.theme-sailing {
+	--accent:      #2a5b96;
+	--accent-deep: #1b3a61;
+	--stripe:      #eef2f9;
+}
+
 /* ---------- base ---------- */
 
 html {
