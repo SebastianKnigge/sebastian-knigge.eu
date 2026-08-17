@@ -1,0 +1,265 @@
+/* ============================================================
+   site.css — shared styles for the framed pages
+   (CV, start page, other, impressum, ...)
+
+   Loaded from subpages/*.html as ../site.css
+
+   These pages render inside the "mitte" frame of index.html,
+   which is 600px wide and 700px tall with scrolling="AUTO".
+   Everything here must therefore stay fluid and must never
+   force horizontal scrolling. No external fonts or assets.
+
+   The palette and type scale intentionally match article.css,
+   so an article and a CV page feel like the same site.
+   ============================================================ */
+
+:root {
+	--ink:        #2c2c2a;
+	--ink-soft:   #5f5e5a;
+	--ink-faint:  #8a8884;
+
+	--accent:      #0f6e56;
+	--accent-deep: #123229;
+
+	--paper:      #ffffff;
+	--paper-warm: #faf9f6;
+	--rule:       #e4e2dc;
+	--stripe:     #f4f3ef;
+
+	--measure: 34rem;
+
+	--serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+	--sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* ---------- base ---------- */
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 2.25rem 1.75rem 3rem;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--serif);
+	font-size: 16px;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+}
+
+.page {
+	max-width: var(--measure);
+	margin: 0 auto;
+}
+
+img, svg, table {
+	max-width: 100%;
+}
+
+a {
+	color: var(--accent);
+	text-underline-offset: 2px;
+}
+
+a:hover {
+	color: var(--accent-deep);
+}
+
+/* ---------- headings ---------- */
+
+h1 {
+	margin: 0 0 1.25rem;
+	font-size: 1.75rem;
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: -0.015em;
+	color: var(--accent-deep);
+}
+
+/* Replaces the old "<b>Label</b><hr>" section markers */
+h2 {
+	margin: 2.25rem 0 0.9rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	font-family: var(--sans);
+	font-size: 1rem;
+	font-weight: 650;
+	letter-spacing: -0.005em;
+	color: var(--accent-deep);
+}
+
+p {
+	margin: 0 0 1rem;
+}
+
+/* ---------- portrait ---------- */
+
+.portrait {
+	display: block;
+	width: 150px;
+	height: auto;
+	margin: 0 0 1.5rem;
+	border-radius: 4px;
+}
+
+/* ---------- generic tables ---------- */
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.92rem;
+}
+
+td, th {
+	padding: 0.55rem 0.6rem;
+	vertical-align: top;
+	text-align: left;
+}
+
+/* Key/value block, e.g. personal details */
+.facts td:first-child {
+	width: 42%;
+	color: var(--ink-soft);
+	font-family: var(--sans);
+	font-size: 0.84rem;
+	white-space: nowrap;
+}
+
+/* Dated entries: employment and education */
+.timeline tr + tr {
+	border-top: 1px solid var(--rule);
+}
+
+.timeline tbody tr:nth-child(odd) {
+	background: var(--stripe);
+}
+
+.timeline .when {
+	width: 26%;
+	font-family: var(--sans);
+	font-size: 0.78rem;
+	line-height: 1.35;
+	color: var(--ink-soft);
+	white-space: nowrap;
+}
+
+.timeline .when .duration {
+	display: block;
+	color: var(--ink-faint);
+	font-size: 0.72rem;
+}
+
+.timeline .what ul {
+	margin: 0;
+	padding-left: 1.1rem;
+}
+
+.timeline .what li + li {
+	margin-top: 0.35rem;
+}
+
+.timeline .logo {
+	width: 74px;
+	text-align: center;
+}
+
+.timeline .logo img {
+	max-height: 42px;
+	width: auto;
+}
+
+.timeline .logo img.tall {
+	max-height: 58px;
+}
+
+/* ---------- certifications ---------- */
+
+.certs {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	gap: 1.25rem 0.75rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.certs li {
+	text-align: center;
+	font-family: var(--sans);
+	font-size: 0.76rem;
+	line-height: 1.3;
+	color: var(--ink);
+}
+
+.certs img {
+	display: block;
+	height: 62px;
+	width: auto;
+	margin: 0 auto 0.5rem;
+}
+
+.certs .code {
+	display: block;
+	margin-top: 0.2rem;
+	color: var(--ink-faint);
+	font-size: 0.72rem;
+	letter-spacing: 0.04em;
+}
+
+/* ---------- lists ---------- */
+
+ul, ol {
+	margin: 0 0 1rem;
+	padding-left: 1.25rem;
+}
+
+li {
+	margin-bottom: 0.4rem;
+}
+
+li::marker {
+	color: var(--accent);
+}
+
+/* ---------- footer note (language switch etc.) ---------- */
+
+.page-note {
+	margin-top: 2.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	font-family: var(--sans);
+	font-size: 0.82rem;
+	color: var(--ink-soft);
+}
+
+/* ---------- narrow frames ---------- */
+
+@media (max-width: 520px) {
+	body {
+		padding: 1.75rem 1.25rem 2.5rem;
+	}
+
+	h1 {
+		font-size: 1.5rem;
+	}
+
+	.timeline .when,
+	.timeline .logo {
+		width: auto;
+	}
+}
+
+/* ---------- print ---------- */
+
+@media print {
+	body {
+		padding: 0;
+		font-size: 11pt;
+	}
+
+	.timeline tbody tr:nth-child(odd) {
+		background: none;
+	}
+}
