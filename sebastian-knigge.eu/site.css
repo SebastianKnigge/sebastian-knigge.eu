@@ -744,6 +744,15 @@ figure .pdf-embed {
 .cat-infrastructure { color: #0f6e56; }
 .cat-data-science   { color: #2a5b96; }
 .cat-management     { color: #854f0b; }
+.cat-ai-ml          { color: #6b3fa0; }
+
+/* Pull quote at the start of an article */
+.article blockquote {
+	margin: 1.5rem 0;
+	padding-left: 1rem;
+	border-left: 3px solid currentColor;
+	font-style: italic;
+}
 
 /* In the article masthead the chip sits next to the date */
 .eyebrow {
